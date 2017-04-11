@@ -12,6 +12,7 @@ enum icon_position_t { icons_left, icons_right, icons_off };
 enum separator_color { FOREGROUND, AUTO, FRAME, CUSTOM };
 enum follow_mode { FOLLOW_NONE, FOLLOW_MOUSE, FOLLOW_KEYBOARD };
 enum markup_mode { MARKUP_NULL, MARKUP_NO, MARKUP_STRIP, MARKUP_FULL };
+enum centering { CENTERING_OFF, CENTERING_HORIZONTAL, CENTERING_VERTICAL, CENTERING_BOTH };
 
 typedef struct _settings {
         bool print_notifications;
@@ -34,6 +35,7 @@ typedef struct _settings {
         char *icons[3];
         unsigned int transparency;
         char *geom;
+        enum centering centering;
         char *title;
         char *class;
         int shrink;
