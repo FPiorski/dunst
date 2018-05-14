@@ -16,7 +16,6 @@
 #include "markup.h"
 #include "notification.h"
 #include "queues.h"
-#include "x11/x.h"
 
 struct colored_layout {
         PangoLayout *l;
@@ -29,15 +28,19 @@ struct colored_layout {
         const struct notification *n;
 };
 
+const struct output *output;
 window win;
 
 PangoFontDescription *pango_fdesc;
 
 void draw_setup(void)
 {
-        x_setup();
+        const struct output *out = output_create();
+        output = out;
 
-        win = x_win_create();
+        out->init();
+        win = out->win_create();
+
         pango_fdesc = pango_font_description_from_string(settings.font);
 }
 
@@ -631,7 +634,7 @@ void draw(void)
         }
 
         calc_window_pos(dim.w, dim.h, &dim.x, &dim.y);
-        x_display_surface(image_surface, win, &dim);
+        output->display_surface(image_surface, win, &dim);
 
         cairo_surface_destroy(image_surface);
         g_slist_free_full(layouts, free_colored_layout);
@@ -639,7 +642,7 @@ void draw(void)
 
 void draw_deinit(void)
 {
-        x_win_destroy(win);
-        x_free();
+        output->win_destroy(win);
+        output->deinit();
 }
 /* vim: set tabstop=8 shiftwidth=8 expandtab textwidth=0: */
