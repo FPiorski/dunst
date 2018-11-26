@@ -16,6 +16,15 @@ struct dimensions {
         int corner_radius;
 };
 
+struct screen_info {
+        int id;
+        int x;
+        int y;
+        unsigned int h;
+        unsigned int mmh;
+        unsigned int w;
+};
+
 struct output {
         void (*init)(void);
         void (*deinit)(void);
@@ -31,6 +40,8 @@ struct output {
         bool (*win_visible)(window);
         cairo_t* (*win_get_context)(window);
 
+        const struct screen_info* (*get_active_screen)(void);
+
         bool (*is_idle)(void);
         bool (*have_fullscreen_window)(void);
 };
@@ -38,3 +49,4 @@ struct output {
 const struct output* output_create(void);
 
 #endif
+/* vim: set tabstop=8 shiftwidth=8 expandtab textwidth=0: */

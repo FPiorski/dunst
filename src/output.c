@@ -17,6 +17,8 @@ const struct output output_x11 = {
         x_win_visible,
         x_win_get_context,
 
+        get_active_screen,
+
         x_is_idle,
         have_fullscreen_window
 };
@@ -25,3 +27,4 @@ const struct output* output_create(void)
 {
         return &output_x11;
 }
+/* vim: set tabstop=8 shiftwidth=8 expandtab textwidth=0: */

@@ -69,12 +69,12 @@ static double screen_dpi_get_from_xft(void)
         return screen_dpi_xft_cache;
 }
 
-static double screen_dpi_get_from_monitor(struct screen_info *scr)
+static double screen_dpi_get_from_monitor(const struct screen_info *scr)
 {
         return (double)scr->h * 25.4 / (double)scr->mmh;
 }
 
-double screen_dpi_get(struct screen_info *scr)
+double screen_dpi_get(const struct screen_info *scr)
 {
         if (  ! settings.force_xinerama
              && settings.per_monitor_dpi)
@@ -300,7 +300,7 @@ bool window_is_fullscreen(Window window)
  * Select the screen on which the Window
  * should be displayed.
  */
-struct screen_info *get_active_screen(void)
+const struct screen_info *get_active_screen(void)
 {
         int ret = 0;
         if (settings.monitor > 0 && settings.monitor < screens_len) {
