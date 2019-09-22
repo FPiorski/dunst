@@ -9,6 +9,14 @@ modified:   dunstrc
 modified:   src/draw.c
 modified:   src/x11/x.c
 new file:   clippy.png
+new file:   fonts.conf
 
 The rest is the same, including the LICENSE file. This fork is NOT endorsed or associated in any other way with the original authors (apart from using their code, of course)
 
+# How to use
+
+you make and install this as you normally would, but
+1) Change the path to clippy.png to something absolute
+2) You need to add the contents of fonts.conf to your local fonts.conf to disable antialiasing for the font used
+3) Copy dunstrc to ~/.config/dunst/
+4) Enjoy!
