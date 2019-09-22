@@ -617,7 +617,8 @@ void draw(void)
 
         struct dimensions dim = calculate_dimensions(layouts);
 
-        cairo_surface_t *image_surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, dim.w, dim.h);
+        cairo_surface_t *image_surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, dim.w, dim.h+96);
+        cairo_surface_t *spinacz = cairo_image_surface_create_from_png("../clippy.png");
 
         bool first = true;
         for (GSList *iter = layouts; iter; iter = iter->next) {
@@ -629,6 +630,12 @@ void draw(void)
 
                 first = false;
         }
+
+        cairo_t *cr = cairo_create(image_surface);
+        cairo_set_source_surface (cr, spinacz, dim.w/2-94/2, dim.h-1);
+        cairo_paint(cr);
+
+        dim.h += 96;
 
         calc_window_pos(dim.w, dim.h, &dim.x, &dim.y);
         x_display_surface(image_surface, win, &dim);
